@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{% endblock %} | Marketplace</title>
+  {% load bootstrap5 %}
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
+</head>
+<body>
+<h1>Marketplace</h1>
+
+ <a class="link-primary" href="/">Home</a>
+ <a class="link-primary" href="contact/">Contact</a>
+ <a class="link-primary" href="/">NEW ITEM</a>
+ <a class="link-primary" href="/">Sign up</a>
+ <a class="link-primary" href="/">Log in</a>
+
+  {% block content %}
+  {% endblock %}
+</div>
+<footer>
+    <div>Footer</div>
+    <ul>
+        <li><a href="/">About</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+        <li><a href=""></a></li>
+        <li><a href=""></a></li>
+    </ul>
+</footer>
+</body>
+</html>
