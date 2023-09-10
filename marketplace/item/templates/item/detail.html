@@ -1,0 +1,39 @@
+{% extends 'core/base.html' %}
+{% block title %}{{ item.name }}{% endblock %}
+
+{% block content %}
+<div>
+    <h1>{{ item.name }}</h1>
+    <img src="{{ item.image.url }}" alt="img">
+    <p>Price: {{ item.price }}</p>
+    <p>Seller: {{ item.created_by }}</p>
+    <p>Description: {{ item.description }}</p>
+</div>
+
+<div>
+    <h2>Related items</h2>
+    {% for item in related_items %}
+    <a href="{% url 'item:detail' item.id %}">
+        <div>
+            <p>{{ item.name }}</p>
+            <p>{{ item.description}}</p>
+            <p>{{ item.price}}</p>
+            <img src="{{ item.image.url }}" alt="img">
+        </div>
+    </a>
+
+
+    {% endfor %}
+
+    {% if request.user == item.created_by %}
+    <div>
+        <p>This is your item!</p>
+        <a href="{% url 'item:delete' item.id %}">Delete</a>
+        <a href="{% url 'item:edit' item.id %}">Edit</a>
+    </div>
+    {% else %}
+        <a href="{% url 'conversation:new' item.id %}">Contact seller</a>
+    {% endif %}
+
+</div>
+{% endblock %}

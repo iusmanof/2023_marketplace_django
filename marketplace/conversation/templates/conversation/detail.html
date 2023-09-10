@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% block title %}Conversation{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-column">
+<h1>Conversation</h1>
+    {% for message in conversation.messages.all %}
+    <div>
+        <p><strong>{{ message.created_by.username }}</strong> @ {{ message.created_at }} </p>
+    </div>
+    <div>
+        <p>{{ message.content }}</p>
+    </div>
+    {% endfor %}
+</div>
+<form action="." method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Send</button>
+</form>
+{% endblock %}

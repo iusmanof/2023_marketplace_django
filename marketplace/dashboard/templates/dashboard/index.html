@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <h2>My items</h2>
+    <div class="d-flex justify-content-center">
+        {% for item in items %}
+        <div class="card" style="width: 18rem;">
+            <img style="width: 100px;" class="card-img-top" src="{{ item.image.url }}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{ item.name }}</h5>
+                <p class="card-text">{{ item.description}}</p>
+                <p>Price: {{ item.price}}</p>
+                <a href="{% url 'item:detail' item.id %}" class="btn btn-primary">Buy</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% block title %}Inbox{% endblock %}
+
+{% block content %}
+<div class="d-flex flex-column">
+    <h1>Inbox</h1>
+    {% for conversation in conversations %}
+    <a href="{% url 'conversation:detail' conversation.id %}">
+        <div>
+            <img src="{{ conversation.item.image.url }}" alt="">
+        </div>
+
+        <div>
+            {% for member in conversation.members.all %}
+            {% if member != request.user %}
+            <p>{{ member.username }} | {{ conversation.modified_at }}</p>
+            <p>{{ conversation.item.name }}</p>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}

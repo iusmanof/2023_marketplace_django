@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+{% block title %}{{ item.name }}{% endblock %}
+
+{% block content %}
+<form method="get" action="{% url 'item:items' %}">
+    <input type="text" name="query" value="{{ query }}" placeholder="Find a bike, a chair or car...">
+    <button>Search</button>
+</form>
+{% for item in items %}
+<a href="{% url 'item:detail' item.id %}">
+    <div>
+        <p>{{ item.name }}</p>
+        <p>{{ item.description}}</p>
+        <p>{{ item.price}}</p>
+        <img src="{{ item.image.url }}" alt="img">
+    </div>
+</a>
+{% endfor %}
+
+<hr>
+<p>Categories</p>
+<ul>
+{% for category in categories %}
+    <li>
+        <a href="{% url 'item:items' %}?query={{ query }}&category={{ category.id }}" {% if category.id == category_id %} style="background: red; {% endif %}">{{ category.name }}</a>
+    </li>
+{% endfor %}
+</ul>
+<hr>
+<br>
+<p>Clear filters</p>
+<a href="{% url 'item:items' %}">Clear filter</a>
+{% endblock %}
